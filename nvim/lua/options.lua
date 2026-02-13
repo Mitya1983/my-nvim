@@ -49,19 +49,9 @@ opt.timeoutlen = 300
 -- Completion
 opt.completeopt = "menuone,noselect"
 
--- Clipboard: use OSC 52 to sync yank with Mac clipboard over SSH
-vim.g.clipboard = {
-    name = "OSC 52",
-    copy = {
-        ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-    },
-    paste = {
-        ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-        ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-    },
-}
-opt.clipboard = "unnamedplus" -- all yank/delete goes to system clipboard
+-- Clipboard: nvim internal registers (no OSC 52 — Terminal.app doesn't support it)
+-- Yank/paste with y/p works within nvim. To paste FROM Mac: Cmd+V in insert mode.
+-- To copy TO Mac: Space+m (disable mouse), select with terminal, Cmd+C.
 
 -- Project-local config: source .nvim.lua from project root
 opt.exrc = true

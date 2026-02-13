@@ -18,7 +18,14 @@ map("n", "<C-Down>", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
 -- Buffer navigation
 map("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 map("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
-map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close buffer" })
+map("n", "<leader>bd", function()
+    local buf = vim.api.nvim_get_current_buf()
+    vim.cmd("bnext")
+    if vim.api.nvim_get_current_buf() == buf then
+        vim.cmd("enew")
+    end
+    pcall(vim.api.nvim_buf_delete, buf, {})
+end, { desc = "Close buffer (keep layout)" })
 
 -- Move lines (Alt+Up/Down)
 map("n", "<A-Down>", "<cmd>m .+1<CR>==", { desc = "Move line down" })

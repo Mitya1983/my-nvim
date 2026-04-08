@@ -21,3 +21,5 @@ require("keymaps")
 require("lazy").setup("plugins", {
     change_detection = { notify = false },
 })
+vim.o.wrap = true
+vim.o.linebreak = true

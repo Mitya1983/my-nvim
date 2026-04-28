@@ -21,6 +21,9 @@ return {
                 require("nvim-treesitter").install(to_install)
             end
 
+            -- .mm (Objective-C++) uses the cpp parser
+            vim.treesitter.language.register("cpp", "objcpp")
+
             -- Enable treesitter highlighting for all buffers that have a parser
             vim.api.nvim_create_autocmd("FileType", {
                 callback = function(args)

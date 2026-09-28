@@ -7,7 +7,7 @@ return {
         if vim.uv.fs_stat(vim.uv.cwd() .. "/" .. custom) then
           return custom
         end
-        return "cmake-build-${variant:buildType}"
+        return "build/${variant:buildType}"
       end,
     },
   },

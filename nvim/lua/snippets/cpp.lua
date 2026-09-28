@@ -10,7 +10,7 @@ local function header_guard()
   local filepath = vim.fn.expand("%:p")
   local cwd = vim.fn.getcwd()
   local relpath = filepath:sub(#cwd + 2) -- strip cwd + leading slash
-  return relpath:upper():gsub("[/%.]", "_")
+  return (relpath:upper():gsub("[/%.%-]", "_"))
 end
 
 ls.add_snippets("cpp", {

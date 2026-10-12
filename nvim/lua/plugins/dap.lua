@@ -5,9 +5,9 @@ return {
       layouts = {
         {
           elements = {
-            { id = "scopes", size = 1 },
+            { id = "scopes", size = 0.75 },
             --{ id = "breakpoints", size = 0.1 },
-            --{ id = "stacks", size = 0.125 },
+            { id = "stacks", size = 0.25 },
           },
           size = 0.4, -- height in lines, since this is a bottom/top layout
           position = "bottom",

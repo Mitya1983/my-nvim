@@ -15,7 +15,7 @@ end
 
 ls.add_snippets("cpp", {
   s("copyr", {
-    t({ "//", "// Create by Mitia Tristan on " }),
+    t({ "//", "// Created by Mitia Tristan on " }),
     f(function()
       return os.date("%Y-%m-%d")
     end),
@@ -56,10 +56,10 @@ ls.add_snippets("cpp", {
   }),
 
   s("unus", {
-    t("[[maybe_unused]]"),
+    t("[[maybe_unused]] "),
   }),
 
   s("nodi", {
-    t("[[nodiscard]]"),
+    t("[[nodiscard]] "),
   }),
 })

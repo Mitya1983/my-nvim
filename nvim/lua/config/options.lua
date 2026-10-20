@@ -36,6 +36,21 @@ local function update_title()
   set_title(vim.fn.fnamemodify(root, ":t"))
 end
 
+-- Restore a neutral title when leaving Neovim (a local shell won't do it for us)
+vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+  group = vim.api.nvim_create_augroup("kobol_terminal_title_restore", { clear = true }),
+  callback = function()
+    set_title(vim.fn.fnamemodify(vim.fn.getcwd(), ":~"))
+  end,
+})
+
+-- Put the project title back when resuming from :suspend / Ctrl-Z
+vim.api.nvim_create_autocmd("VimResume", {
+  callback = function()
+    vim.schedule(update_title)
+  end,
+})
+
 vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter", "DirChanged", "FocusGained" }, {
   group = vim.api.nvim_create_augroup("kobol_terminal_title", { clear = true }),
   callback = function()

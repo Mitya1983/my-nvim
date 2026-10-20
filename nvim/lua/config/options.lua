@@ -7,7 +7,8 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
-
+vim.opt.spell = true
+vim.opt.spelllang = { "en_gb" }
 vim.opt.guicursor = table.concat({
   "n-v-c:block",
   "i-ci-ve:ver25-iCursor",
@@ -57,3 +58,16 @@ vim.api.nvim_create_autocmd({ "VimEnter", "BufEnter", "DirChanged", "FocusGained
     vim.schedule(update_title)
   end,
 })
+
+if vim.env.SSH_TTY then
+  local osc52 = require("vim.ui.clipboard.osc52")
+  local function paste()
+    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+  end
+  vim.g.clipboard = {
+    name = "OSC 52 (copy only)",
+    copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+    paste = { ["+"] = paste, ["*"] = paste },
+  }
+  vim.opt.clipboard = "unnamedplus"
+end
